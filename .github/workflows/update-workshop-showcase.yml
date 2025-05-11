@@ -2,10 +2,15 @@ name: Update Steam Workshop Showcase
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches:
+      - main  # Only runs when you push to this profile repo
+
+  repository_dispatch:  # Triggered externally (for new repo creation)
+
   schedule:
-    - cron: '0 0 * * 0'  # Optional: runs every Sunday at midnight
+    - cron: '0 7 * * *'  # 2am EST == 7am UTC (GitHub Actions uses UTC)
+
+  workflow_dispatch:  # Manual trigger button in GitHub UI
 
 jobs:
   update:
