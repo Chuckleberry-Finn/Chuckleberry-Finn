@@ -43,6 +43,7 @@ def get_repos():
 
     return filtered
 
+
 def get_subscriber_count(steam_url):
     try:
         headers = {
@@ -55,25 +56,16 @@ def get_subscriber_count(steam_url):
         }
         r = requests.get(steam_url, headers=headers, timeout=10)
         if r.status_code != 200:
-            return "?"
+            return " "
 
         soup = BeautifulSoup(r.text, "html.parser")
 
-        # Find the 'Author Stats' panel
-        panel = soup.find("div", class_="panel owner")
-        if not panel:
-            return " "
-
-        # Look for the second row (Subscribers)
-        stats_table = panel.find("table", class_="stats_table")
-        if not stats_table:
-            return " "
-
-        rows = stats_table.find_all("tr")
-        for row in rows:
-            cols = row.find_all("td")
-            if len(cols) == 2 and "Current Subscribers" in cols[1].text:
-                return cols[0].text.strip().replace(",", "")
+        # Look for all stats_table elements
+        for table in soup.find_all("table", class_="stats_table"):
+            for row in table.find_all("tr"):
+                cols = row.find_all("td")
+                if len(cols) == 2 and "Subscribers" in cols[1].text:
+                    return cols[0].text.strip().replace(",", "")
 
     except Exception as e:
         print(f"[Scraper error] {steam_url} → {e}")
