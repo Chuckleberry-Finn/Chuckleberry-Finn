@@ -58,12 +58,12 @@ def get_subscriber_count(steam_url):
         # Find the 'Author Stats' panel
         panel = soup.find("div", class_="panel owner")
         if not panel:
-            return "?"
+            return " "
 
         # Look for the second row (Subscribers)
         stats_table = panel.find("table", class_="stats_table")
         if not stats_table:
-            return "?"
+            return " "
 
         rows = stats_table.find_all("tr")
         for row in rows:
@@ -78,7 +78,7 @@ def get_subscriber_count(steam_url):
 
 
 def generate_table(repos):
-    rows = ["| Project | Subscribers | Link |", "|---------|-------------|"]
+    rows = ["| Project | Subscribers |", "|---------|-------------|"]
     for repo in repos:
         steam_url = repo["steam_url"]
         subs = get_subscriber_count(steam_url)
