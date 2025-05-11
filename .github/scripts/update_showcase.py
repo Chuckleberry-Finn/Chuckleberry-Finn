@@ -10,6 +10,7 @@ START_MARKER = "<!-- START:WORKSHOP -->"
 END_MARKER = "<!-- END:WORKSHOP -->"
 
 
+
 def get_repos():
     url = "https://api.github.com/user/repos"
     headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
@@ -31,7 +32,15 @@ def get_repos():
         repos.extend(page_repos)
         page += 1
 
-    return [repo for repo in repos if repo["description"] and "steamcommunity.com" in repo["description"]]
+    # Only keep repos where homepage field has a Steam Workshop link
+    filtered = []
+    for repo in repos:
+        homepage = repo.get("homepage", "")
+        if homepage and "steamcommunity.com" in homepage:
+            repo["steam_url"] = homepage
+            filtered.append(repo)
+
+    return filtered
 
 
 def get_subscriber_count(steam_url):
@@ -49,7 +58,7 @@ def get_subscriber_count(steam_url):
 def generate_table(repos):
     rows = ["| Project | Subscribers | Link |", "|---------|-------------|------|"]
     for repo in repos:
-        steam_url = repo["description"]
+        steam_url = repo["steam_url"]
         subs = get_subscriber_count(steam_url)
         name = repo["name"]
         row = f"| {name} | {subs} | [View]({steam_url}) |"
