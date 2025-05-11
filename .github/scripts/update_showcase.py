@@ -44,7 +44,14 @@ def get_repos():
     return filtered
 
 
-def get_subscriber_count(steam_url):
+def get_workshop_title(soup):
+    title_div = soup.find("div", class_="workshopItemTitle")
+    if title_div:
+        return title_div.text.strip()
+    return None
+
+
+def get_workshop_data(steam_url):
     try:
         headers = {
             "User-Agent": (
@@ -56,31 +63,45 @@ def get_subscriber_count(steam_url):
         }
         r = requests.get(steam_url, headers=headers, timeout=10)
         if r.status_code != 200:
-            return " "
+            return " ", " "
 
         soup = BeautifulSoup(r.text, "html.parser")
 
-        # Look for all stats_table elements
+        # Subscriber count
+        sub_count = "?"
         for table in soup.find_all("table", class_="stats_table"):
             for row in table.find_all("tr"):
                 cols = row.find_all("td")
                 if len(cols) == 2 and "Subscribers" in cols[1].text:
-                    return cols[0].text.strip().replace(",", "")
+                    sub_count = cols[0].text.strip().replace(",", "")
+
+        # Title
+        title = get_workshop_title(soup)
+        return sub_count, title
 
     except Exception as e:
         print(f"[Scraper error] {steam_url} → {e}")
-
-    return " "
+        return " ", " "
 
 
 def generate_table(repos):
-    rows = ["| Project | Subscribers |", "|---------|-------------|"]
+    rows = ["| Project | Subscribers | Links |", "|---------|-------------|--------|"]
     for repo in repos:
         steam_url = repo["steam_url"]
-        subs = get_subscriber_count(steam_url)
-        name = repo["name"]
-        row = f"| [{name}]({steam_url}) | {subs} |"
+        github_url = repo["html_url"]
+        repo_name = repo["name"]
+
+        subs, title = get_workshop_data(steam_url)
+
+        # Fallback to repo name if workshop title is missing
+        project_name = title if title else repo_name
+
+        steam_link = f"[Steam]({steam_url})"
+        repo_link = f"[Repo]({github_url})"
+
+        row = f"| {project_name} | {subs} | {steam_link} · {repo_link} |"
         rows.append(row)
+
     return "\n".join(rows)
 
 
