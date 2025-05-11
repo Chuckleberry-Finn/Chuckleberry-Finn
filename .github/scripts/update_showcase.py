@@ -9,14 +9,20 @@ README_FILE = "README.md"
 START_MARKER = "<!-- START:WORKSHOP -->"
 END_MARKER = "<!-- END:WORKSHOP -->"
 
+
 def get_repos():
-    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos"
+    url = "https://api.github.com/user/repos"
     headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
     repos = []
     page = 1
 
     while True:
-        r = requests.get(url, headers=headers, params={"page": page, "per_page": 100})
+        r = requests.get(url, headers=headers, params={
+            "page": page,
+            "per_page": 100,
+            "visibility": "public",
+            "affiliation": "owner,collaborator,organization_member"
+        })
         if r.status_code != 200:
             raise Exception("GitHub API error:", r.text)
         page_repos = r.json()
@@ -26,6 +32,7 @@ def get_repos():
         page += 1
 
     return [repo for repo in repos if repo["description"] and "steamcommunity.com" in repo["description"]]
+
 
 def get_subscriber_count(steam_url):
     try:
@@ -38,6 +45,7 @@ def get_subscriber_count(steam_url):
         pass
     return "?"
 
+
 def generate_table(repos):
     rows = ["| Project | Subscribers | Link |", "|---------|-------------|------|"]
     for repo in repos:
@@ -47,6 +55,7 @@ def generate_table(repos):
         row = f"| {name} | {subs} | [View]({steam_url}) |"
         rows.append(row)
     return "\n".join(rows)
+
 
 def update_readme(table):
     with open(README_FILE, "r", encoding="utf-8") as f:
@@ -66,6 +75,7 @@ def update_readme(table):
 
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(new_content)
+
 
 if __name__ == "__main__":
     repos = get_repos()
