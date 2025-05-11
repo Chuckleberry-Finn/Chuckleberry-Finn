@@ -12,3 +12,5 @@
 | Conditional-Speech | 280741 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2398253681) · [Repo](https://github.com/Chuckleberry-Finn/zomboid-cnd-speech) |
 
 <!-- END:WORKSHOP -->
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y551NJ2)
