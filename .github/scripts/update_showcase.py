@@ -89,21 +89,38 @@ def get_workshop_data(steam_url):
 
 
 def generate_table(repos):
-    rows = ["| Project | Subscribers | Links |", "|---------|-------------|--------|"]
+    table_data = []
+
     for repo in repos:
         steam_url = repo["steam_url"]
         github_url = repo["html_url"]
         repo_name = repo["name"]
 
-        subs, title = get_workshop_data(steam_url)
+        subs_str, title = get_workshop_data(steam_url)
 
-        # Fallback to repo name if workshop title is missing
+        # Fallbacks
         project_name = title if title else repo_name
+        try:
+            subs_int = int(subs_str.replace(",", "")) if subs_str != "?" else -1
+        except ValueError:
+            subs_int = -1
 
-        steam_link = f"[Steam]({steam_url})"
-        repo_link = f"[Repo]({github_url})"
+        table_data.append({
+            "name": project_name,
+            "subs": subs_str,
+            "subs_num": subs_int,
+            "steam": steam_url,
+            "repo": github_url
+        })
 
-        row = f"| {project_name} | {subs} | {steam_link} · {repo_link} |"
+    # Sort by subs_num descending
+    table_data.sort(key=lambda x: x["subs_num"], reverse=True)
+
+    rows = ["| Project | Subscribers | Links |", "|---------|-------------|--------|"]
+    for entry in table_data:
+        steam_link = f"[Steam]({entry['steam']})"
+        repo_link = f"[Repo]({entry['repo']})"
+        row = f"| {entry['name']} | {entry['subs']} | {steam_link} · {repo_link} |"
         rows.append(row)
 
     return "\n".join(rows)
