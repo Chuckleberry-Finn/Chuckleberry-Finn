@@ -36,6 +36,10 @@ def get_repos():
     # Only keep repos where homepage field has a Steam Workshop link
     filtered = []
     for repo in repos:
+
+        if repo.get("archived"):
+            continue
+
         homepage = repo.get("homepage", "")
         if homepage and "steamcommunity.com" in homepage:
             repo["steam_url"] = homepage
