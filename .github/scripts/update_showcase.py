@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 GITHUB_USERNAME = "Chuckleberry-Finn"
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+GITHUB_TOKEN = os.environ["CHUCK_PAT"]
 README_FILE = "README.md"
 
 START_MARKER = "<!-- START:WORKSHOP -->"
