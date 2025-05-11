@@ -46,27 +46,33 @@ def get_repos():
 def get_subscriber_count(steam_url):
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0"
+            "User-Agent": "Mozilla/5.0",
+            "Accept-Language": "en-US,en;q=0.9"
         }
         r = requests.get(steam_url, headers=headers, timeout=10)
         if r.status_code != 200:
             return "?"
 
-        # Attempt 1: Look for exact subscriber text
-        match = re.search(r'(\d[\d,\.]*)\s+subscribers', r.text, re.IGNORECASE)
-        if match:
-            return match.group(1).replace(",", "")
-
-        # Attempt 2: Look for subscriber count inside common divs
         soup = BeautifulSoup(r.text, "html.parser")
-        subtext = soup.find(text=re.compile(r"subscribers", re.IGNORECASE))
-        if subtext:
-            match = re.search(r'(\d[\d,\.]*)', subtext)
-            if match:
-                return match.group(1).replace(",", "")
+
+        # Find the 'Author Stats' panel
+        panel = soup.find("div", class_="panel owner")
+        if not panel:
+            return "?"
+
+        # Look for the second row (Subscribers)
+        stats_table = panel.find("table", class_="stats_table")
+        if not stats_table:
+            return "?"
+
+        rows = stats_table.find_all("tr")
+        for row in rows:
+            cols = row.find_all("td")
+            if len(cols) == 2 and "Current Subscribers" in cols[1].text:
+                return cols[0].text.strip().replace(",", "")
 
     except Exception as e:
-        print(f"Error scraping {steam_url}: {e}")
+        print(f"[Scraper error] {steam_url} → {e}")
 
     return " "
 
