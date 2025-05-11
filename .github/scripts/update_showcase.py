@@ -10,8 +10,6 @@ README_FILE = "README.md"
 START_MARKER = "<!-- START:WORKSHOP -->"
 END_MARKER = "<!-- END:WORKSHOP -->"
 
-
-
 def get_repos():
     url = "https://api.github.com/user/repos"
     headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
@@ -33,13 +31,10 @@ def get_repos():
         repos.extend(page_repos)
         page += 1
 
-    # Only keep repos where homepage field has a Steam Workshop link
     filtered = []
     for repo in repos:
-
         if repo.get("archived"):
             continue
-
         homepage = repo.get("homepage", "")
         if homepage and "steamcommunity.com" in homepage:
             repo["steam_url"] = homepage
@@ -47,13 +42,11 @@ def get_repos():
 
     return filtered
 
-
 def get_workshop_title(soup):
     title_div = soup.find("div", class_="workshopItemTitle")
     if title_div:
         return title_div.text.strip()
     return None
-
 
 def get_workshop_data(steam_url):
     try:
@@ -67,7 +60,7 @@ def get_workshop_data(steam_url):
         }
         r = requests.get(steam_url, headers=headers, timeout=10)
         if r.status_code != 200:
-            return " ", " "
+            return " ", None
 
         soup = BeautifulSoup(r.text, "html.parser")
 
@@ -78,15 +71,14 @@ def get_workshop_data(steam_url):
                 cols = row.find_all("td")
                 if len(cols) == 2 and "Subscribers" in cols[1].text:
                     sub_count = cols[0].text.strip().replace(",", "")
+                    break
 
-        # Title
         title = get_workshop_title(soup)
         return sub_count, title
 
     except Exception as e:
         print(f"[Scraper error] {steam_url} → {e}")
-        return " ", " "
-
+        return " ", None
 
 def generate_table(repos):
     table_data = []
@@ -97,34 +89,32 @@ def generate_table(repos):
         repo_name = repo["name"]
 
         subs_str, title = get_workshop_data(steam_url)
-
-        # Fallbacks
         project_name = title if title else repo_name
+
         try:
-            subs_int = int(subs_str.replace(",", "")) if subs_str != "?" else -1
+            subs_num = int(subs_str.replace(",", "")) if subs_str != "?" else -1
         except ValueError:
-            subs_int = -1
+            subs_num = -1
 
         table_data.append({
             "name": project_name,
-            "subs": subs_str,
-            "subs_num": subs_int,
+            "subs_num": subs_num,
             "steam": steam_url,
             "repo": github_url
         })
 
-    # Sort by subs_num descending
+    # Sort by subscriber count, descending
     table_data.sort(key=lambda x: x["subs_num"], reverse=True)
 
     rows = ["| Project | Subscribers | Links |", "|---------|-------------|--------|"]
     for entry in table_data:
+        subs_display = f"{entry['subs_num']:,}" if entry['subs_num'] >= 0 else "?"
         steam_link = f"[Steam]({entry['steam']})"
         repo_link = f"[Repo]({entry['repo']})"
-        row = f"| {entry['name']} | {entry['subs']} | {steam_link} · {repo_link} |"
+        row = f"| {entry['name']} | {subs_display} | {steam_link} · {repo_link} |"
         rows.append(row)
 
     return "\n".join(rows)
-
 
 def update_readme(table):
     with open(README_FILE, "r", encoding="utf-8") as f:
@@ -144,7 +134,6 @@ def update_readme(table):
 
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(new_content)
-
 
 if __name__ == "__main__":
     repos = get_repos()
