@@ -1,5 +1,6 @@
 import os
 import requests
+import re
 from bs4 import BeautifulSoup
 
 GITHUB_USERNAME = "Chuckleberry-Finn"
@@ -42,17 +43,32 @@ def get_repos():
 
     return filtered
 
-
 def get_subscriber_count(steam_url):
     try:
-        r = requests.get(steam_url)
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
+        r = requests.get(steam_url, headers=headers, timeout=10)
+        if r.status_code != 200:
+            return "?"
+
+        # Attempt 1: Look for exact subscriber text
+        match = re.search(r'(\d[\d,\.]*)\s+subscribers', r.text, re.IGNORECASE)
+        if match:
+            return match.group(1).replace(",", "")
+
+        # Attempt 2: Look for subscriber count inside common divs
         soup = BeautifulSoup(r.text, "html.parser")
-        count_elem = soup.find("div", class_="numSubs")
-        if count_elem:
-            return count_elem.text.strip()
-    except Exception:
-        pass
-    return "?"
+        subtext = soup.find(text=re.compile(r"subscribers", re.IGNORECASE))
+        if subtext:
+            match = re.search(r'(\d[\d,\.]*)', subtext)
+            if match:
+                return match.group(1).replace(",", "")
+
+    except Exception as e:
+        print(f"Error scraping {steam_url}: {e}")
+
+    return " "
 
 
 def generate_table(repos):
