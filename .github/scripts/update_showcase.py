@@ -72,12 +72,12 @@ def get_subscriber_count(steam_url):
 
 
 def generate_table(repos):
-    rows = ["| Project | Subscribers | Link |", "|---------|-------------|------|"]
+    rows = ["| Project | Subscribers | Link |", "|---------|-------------|"]
     for repo in repos:
         steam_url = repo["steam_url"]
         subs = get_subscriber_count(steam_url)
         name = repo["name"]
-        row = f"| {name} | {subs} | [View]({steam_url}) |"
+        row = f"| [{name}]({steam_url}) | {subs} |"
         rows.append(row)
     return "\n".join(rows)
 
