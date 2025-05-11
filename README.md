@@ -2,4 +2,7 @@
 
 <!-- START:WORKSHOP -->
 
+| Project | Subscribers | Link |
+|---------|-------------|------|
+
 <!-- END:WORKSHOP -->
