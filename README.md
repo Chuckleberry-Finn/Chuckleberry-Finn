@@ -1,5 +1,3 @@
-## Steam Workshop Projects
-
 <!-- START:WORKSHOP -->
 
 | Project | Subscribers | Links |
