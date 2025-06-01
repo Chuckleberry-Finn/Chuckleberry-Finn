@@ -106,7 +106,7 @@ def generate_table(repos):
     # Sort by subscriber count, descending
     table_data.sort(key=lambda x: x["subs_num"], reverse=True)
 
-    rows = ["| Project | Subscribers | Links |", "|---------|-------------|--------|"]
+    rows = ["| Modification/APIs for [Project-Zomboid](https://projectzomboid.com/blog/the-game/) | Subscribers | Links |", "|---------|-------------|--------|"]
     for entry in table_data:
         subs_display = f"{entry['subs_num']:,}" if entry['subs_num'] >= 0 else "?"
         steam_link = f"[Steam]({entry['steam']})"
