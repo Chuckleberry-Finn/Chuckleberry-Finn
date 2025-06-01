@@ -22,14 +22,14 @@
 <!-- END:WORKSHOP -->
 
 | My Games                                                                      |
-|-------------------------------------------------------------------------------|
+|:------------------------------------------------------------------------------|
 | [(Untitled) Haunted House](https://github.com/Chuckleberry-Finn/hauntedHouse) |
 
 
-| Other Projects                                                      | Description                                                                    |
-|---------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [PZ-translator](https://github.com/Chuckleberry-Finn/pz-translator) | Tool to generate Project Zomboid translations using Google translate API calls. |
-| [SpriteStacker](https://github.com/Chuckleberry-Finn/SpriteStacker) | Tool to preview GML (GameMaker) stacked-sprites.                               |
+| Other Projects                                                         | Description                                                                     |
+|:-----------------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| [PZ-translator](https://github.com/Chuckleberry-Finn/pz-translator)    | Tool to generate Project Zomboid translations using Google translate API calls. |
+| [SpriteStacker](https://github.com/Chuckleberry-Finn/SpriteStacker)    | Tool to preview GML (GameMaker) stacked-sprites.                                |
 <br>
 <p><a href="https://ko-fi.com/Y8Y551NJ2"><img src="https://ko-fi.com/img/githubbutton_sm.svg" height="50"/></a></p>
 
