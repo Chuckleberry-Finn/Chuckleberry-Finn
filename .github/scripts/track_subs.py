@@ -67,11 +67,13 @@ for entry in commits:
 df = pd.DataFrame(data)
 df = df.sort_values(by="date")
 df = df.drop_duplicates(subset=["mod", "date"], keep="last")
-pivot_df = df.pivot_table(index="date", columns="mod", values="subscribers", aggfunc="last").fillna(0).ffill()
+pivot_df = df.pivot_table(index="date", columns="mod", values="subscribers", aggfunc="last").ffill()
 
-# Sort mods by total subscribers (last value)
-final_totals = pivot_df.iloc[-1].sort_values(ascending=False)
-pivot_df = pivot_df[final_totals.index]
+# Sort mods by change since tracking started (not total subscribers)
+initial_totals = pivot_df.apply(lambda col: col[col.first_valid_index()] if col.first_valid_index() is not None else pd.NA)
+final_totals = pivot_df.iloc[-1] - initial_totals
+sorted_mods = final_totals.sort_values(ascending=False).index
+pivot_df = pivot_df[sorted_mods]
 
 # --- Precompute legend labels for each time range ---
 legend_labels = {"1w": [], "1m": [], "3m": [], "All": []}
@@ -82,14 +84,25 @@ for mod in pivot_df.columns:
     mod_traces.append((mod, y_vals))
     trimmed_mod = (mod[:37] + "...") if len(mod) > 40 else mod
     for label, days in [("1w", 7), ("1m", 30), ("3m", 90), ("All", None)]:
-        if days is not None and len(y_vals) > days:
-            change = y_vals[-1] - y_vals[-days-1]
-        elif days is None and len(y_vals) > 1:
-            change = y_vals[-1] - y_vals[0]
+        if days is not None and len(y_vals) > 1:
+            valid_vals = [v for v in y_vals[-days-1:] if not pd.isna(v)]
+            if len(valid_vals) < 2:
+                change = 0
+            else:
+                change = int(valid_vals[-1]) - int(valid_vals[0])
+        elif days is None:
+            first_valid_index = next((i for i, v in enumerate(y_vals) if not pd.isna(v)), None)
+            last_valid_index = next((i for i in reversed(range(len(y_vals))) if not pd.isna(y_vals[i])), None)
+            if first_valid_index is not None and last_valid_index is not None and first_valid_index != last_valid_index:
+                change = int(y_vals[last_valid_index]) - int(y_vals[first_valid_index])
+            else:
+                change = 0
         else:
             change = 0
+
         symbol = "▲" if change > 0 else "▼" if change < 0 else "•"
-        legend_labels[label].append(f"{trimmed_mod} ({int(y_vals[-1])} {symbol}{abs(int(change))})")
+        final_val = int(y_vals[-1]) if not pd.isna(y_vals[-1]) else 0
+        legend_labels[label].append(f"{trimmed_mod} ({final_val} {symbol}{abs(change)})")
 
 # --- Build traces ---
 fig = go.Figure()
@@ -123,18 +136,12 @@ for label, days, show_deltas in [("1w", 7, True), ("1m", 30, True), ("3m", 90, F
     vis = visibility_pattern(show_deltas, total_traces)
     new_names = legend_labels[label]
     if len(new_names) < total_traces:
-        new_names += ["" for _ in range(total_traces - len(new_names))]  # pad to avoid index error
-
-    args = [{"visible": vis, "name": new_names}]
-    if days is not None:
-        args.append({"xaxis.range": safe_range(pivot_df, days)})
-    else:
-        args.append({"xaxis.autorange": True})
+        new_names += [legend_labels["All"][i] for i in range(len(new_names), total_traces)]
 
     buttons.append(dict(
         label=label,
-        method="update",
-        args=args
+        method="restyle",
+        args=[{"visible": vis, "name": new_names}]
     ))
 
 fig.update_layout(
@@ -162,8 +169,8 @@ fig.update_layout(
             xanchor="center",
             y=1.2,
             yanchor="top",
+            bgcolor="#333333",
             bordercolor="#888888",
-            bgcolor="#555555",
             font=dict(color="#ffffff"),
             buttons=buttons
         )
