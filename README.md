@@ -1,4 +1,4 @@
-[<img src=https://raw.githubusercontent.com/Chuckleberry-Finn/Chuckleberry-Finn.github.io/refs/heads/main/mod_stack_preview.png width="900">](https://chuckleberry-finn.github.io/)
+[<img src=https://raw.githubusercontent.com/Chuckleberry-Finn/Chuckleberry-Finn.github.io/refs/heads/main/mod_stack_preview.png width="800">](https://chuckleberry-finn.github.io/)
 <!-- START:WORKSHOP -->
 
 | Modification/APIs for [Project-Zomboid](https://projectzomboid.com/blog/the-game/) | Subscribers | Links |
