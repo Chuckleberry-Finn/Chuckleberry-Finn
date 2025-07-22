@@ -3,23 +3,23 @@
 
 | Modification/APIs for [Project-Zomboid](https://projectzomboid.com/blog/the-game/) | Subscribers | Links |
 |:---------|:-------------|:--------|
-| Skill Recovery Journal | 2,401,894 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2503622437) · [Repo](https://github.com/Chuckleberry-Finn/Skill-Recovery-Journal) |
-| Easy Config Chucked | 2,122,867 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2529746725) · [Repo](https://github.com/Chuckleberry-Finn/EasyConfigChucked) |
-| errorMagnifier | 1,766,559 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2896041179) · [Repo](https://github.com/Chuckleberry-Finn/errorMagnifier) |
-| [B41] Expanded Helicopter Events | 1,530,317 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2458631365) · [Repo](https://github.com/TEHE-Studios/ExpandedHelicopterEvents) |
-| Swap It | 1,070,179 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2366717227) · [Repo](https://github.com/Chuckleberry-Finn/SwapIt) |
-| Mod Update and Alert System | 501,755 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3077900375) · [Repo](https://github.com/Chuckleberry-Finn/moddingAlertSystem) |
-| Night Vision Chucked | 455,367 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2842179206) · [Repo](https://github.com/Chuckleberry-Finn/Night-Vision-Chucked) |
-| You drive, I sleep | 409,953 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2830570280) · [Repo](https://github.com/Chuckleberry-Finn/You-Drive-I-Sleep) |
-| Conditional-Speech | 285,741 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2398253681) · [Repo](https://github.com/Chuckleberry-Finn/zomboid-cnd-speech) |
-| Military Grid Reference System For Map Callouts Cause You And Your Friends Get Lost Easily | 250,215 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2928660831) · [Repo](https://github.com/Chuckleberry-Finn/MGRS-FMCCYAYFGLE) |
-| Game Night | 154,408 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3058279917) · [Repo](https://github.com/Chuckleberry-Finn/game-night) |
-| Named Literature | 122,633 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2822983942) · [Repo](https://github.com/Chuckleberry-Finn/Named-Literature) |
-| Zombies Hear Your Microphone | 96,063 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3004111200) · [Repo](https://github.com/Chuckleberry-Finn/Zombies-Hear-Your-Microphone) |
-| Shops and Traders | 68,806 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2853615523) · [Repo](https://github.com/Chuckleberry-Finn/pz-shops) |
-| Bard to the Bone | 4,816 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3484029638) · [Repo](https://github.com/Chuckleberry-Finn/Bard-To-The-Bone) |
-| Interactive Tailoring | 4,569 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3522680786) · [Repo](https://github.com/Chuckleberry-Finn/interactive-tailoring) |
-| [Very Unstable - Testers Welcomed] Vanilla Weapons Expanded+ | 2,071 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3395648868) · [Repo](https://github.com/Chuckleberry-Finn/Vanilla-Weapons-Expanded) |
+| Skill Recovery Journal | 2,403,444 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2503622437) · [Repo](https://github.com/Chuckleberry-Finn/Skill-Recovery-Journal) |
+| Easy Config Chucked | 2,123,279 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2529746725) · [Repo](https://github.com/Chuckleberry-Finn/EasyConfigChucked) |
+| errorMagnifier | 1,768,191 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2896041179) · [Repo](https://github.com/Chuckleberry-Finn/errorMagnifier) |
+| [B41] Expanded Helicopter Events | 1,530,309 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2458631365) · [Repo](https://github.com/TEHE-Studios/ExpandedHelicopterEvents) |
+| Swap It | 1,070,702 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2366717227) · [Repo](https://github.com/Chuckleberry-Finn/SwapIt) |
+| Mod Update and Alert System | 503,472 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3077900375) · [Repo](https://github.com/Chuckleberry-Finn/moddingAlertSystem) |
+| Night Vision Chucked | 455,335 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2842179206) · [Repo](https://github.com/Chuckleberry-Finn/Night-Vision-Chucked) |
+| You drive, I sleep | 410,058 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2830570280) · [Repo](https://github.com/Chuckleberry-Finn/You-Drive-I-Sleep) |
+| Conditional-Speech | 285,845 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2398253681) · [Repo](https://github.com/Chuckleberry-Finn/zomboid-cnd-speech) |
+| Military Grid Reference System For Map Callouts Cause You And Your Friends Get Lost Easily | 250,295 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2928660831) · [Repo](https://github.com/Chuckleberry-Finn/MGRS-FMCCYAYFGLE) |
+| Game Night | 154,602 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3058279917) · [Repo](https://github.com/Chuckleberry-Finn/game-night) |
+| Named Literature | 122,619 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2822983942) · [Repo](https://github.com/Chuckleberry-Finn/Named-Literature) |
+| Zombies Hear Your Microphone | 96,086 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3004111200) · [Repo](https://github.com/Chuckleberry-Finn/Zombies-Hear-Your-Microphone) |
+| Shops and Traders | 68,826 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2853615523) · [Repo](https://github.com/Chuckleberry-Finn/pz-shops) |
+| Bard to the Bone | 4,826 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3484029638) · [Repo](https://github.com/Chuckleberry-Finn/Bard-To-The-Bone) |
+| Interactive Tailoring | 4,745 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3522680786) · [Repo](https://github.com/Chuckleberry-Finn/interactive-tailoring) |
+| [Very Unstable - Testers Welcomed] Vanilla Weapons Expanded+ | 2,067 | [Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3395648868) · [Repo](https://github.com/Chuckleberry-Finn/Vanilla-Weapons-Expanded) |
 
 <!-- END:WORKSHOP -->
 
