@@ -177,4 +177,4 @@ fig.update_layout(
     ]
 )
 
-fig.show()
+fig.write_html("mod_subscriber_graph.html")
