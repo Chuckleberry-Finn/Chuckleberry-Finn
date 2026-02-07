@@ -36,8 +36,3 @@
 <br>
 <p><a href="https://ko-fi.com/Y8Y551NJ2"><img src="https://ko-fi.com/img/githubbutton_sm.svg" height="50"/></a></p>
 
-<p>
-  <img src="https://github-readme-stats.vercel.app/api?username=Chuckleberry-Finn&show_icons=true&theme=github_dark" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Chuckleberry-Finn&layout=compact&theme=github_dark" height="150"/>
-</p>
-
